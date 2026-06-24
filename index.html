@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Plataforma inteligente de facturación electrónica para empresas dominicanas. DGII Compliant.">
+<title>FAC IA — Facturación Electrónica Inteligente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://js.puter.com/v2/"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;background:#fff;color:#111827;min-height:100vh}
+:root{--black:#111827;--g900:#1f2937;--g700:#374151;--g500:#6b7280;--g400:#9ca3af;--g200:#e5e7eb;--g100:#f3f4f6;--g50:#f9fafb;--white:#fff;--green:#16a34a;--red:#dc2626;--blue:#2563eb;--r:12px;--rl:20px}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1}
+h2{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;letter-spacing:-.8px;line-height:1.2}
+h3{font-size:1.125rem;font-weight:600;letter-spacing:-.3px}
+p{color:var(--g500);line-height:1.65}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--g200)}
+.ni{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nlogo{font-size:20px;font-weight:800;letter-spacing:-1px;color:var(--black);display:flex;align-items:center;gap:6px}
+.ndot{width:8px;height:8px;border-radius:50%;background:var(--black);flex-shrink:0}
+.nlinks{display:flex;align-items:center;gap:6px}
+.nlink{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--g700);cursor:pointer;border:none;background:none}
+.nlink:active{background:var(--g100)}
+.nbtn{padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;background:var(--black);color:#fff;border:none;cursor:pointer}
+
+/* LANDING */
+section{padding:100px 24px}
+.ctr{max-width:1200px;margin:0 auto}
+#hero{padding:150px 24px 90px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--g100);border:1px solid var(--g200);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;color:var(--g700);margin-bottom:24px}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#16a34a}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r);font-size:15px;font-weight:600;background:var(--black);color:#fff;border:none;cursor:pointer;transition:all .2s}
+.btn-p:active{background:var(--g900)}
+.btn-s{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r);font-size:15px;font-weight:600;background:var(--white);color:var(--black);border:1.5px solid var(--g200);cursor:pointer}
+.ctas{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:36px}
+.stats{margin-top:56px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.stat-v{font-size:24px;font-weight:800;letter-spacing:-1px;color:var(--black)}
+.stat-l{font-size:12px;color:var(--g500);font-weight:500}
+.stat-d{width:1px;height:36px;background:var(--g200)}
+/* mockup */
+.mock{margin-top:64px;max-width:860px;margin-left:auto;margin-right:auto;background:var(--white);border:1px solid var(--g200);border-radius:var(--rl);box-shadow:0 32px 80px rgba(0,0,0,.1);overflow:hidden}
+.mbar{background:var(--g50);border-bottom:1px solid var(--g200);padding:12px 16px;display:flex;align-items:center;gap:7px}
+.md{width:10px;height:10px;border-radius:50%}
+.mbody{display:grid;grid-template-columns:180px 1fr;min-height:300px}
+.msb{background:var(--g50);border-right:1px solid var(--g200);padding:14px}
+.mni{height:24px;border-radius:6px;background:var(--g200);margin-bottom:6px}
+.mni.act{background:var(--black)}
+.mc{padding:20px}
+.mmet{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.mcard{background:#fff;border:1px solid var(--g200);border-radius:10px;padding:14px}
+.mn{font-size:20px;font-weight:800;margin-bottom:2px}
+.ml{font-size:11px;color:var(--g500)}
+.mrow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--g100)}
+.mrow:last-child{border:none}
+.mt2{height:9px;border-radius:4px;background:var(--g200)}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600}
+.bg{background:#dcfce7;color:#16a34a}.bb{background:#dbeafe;color:#2563eb}.bgr{background:var(--g100);color:var(--g700)}.br{background:#fee2e2;color:#dc2626}
+
+/* PROBLEMS */
+#problems{background:var(--g50)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:44px}
+.pcard{background:#fff;border:1px solid var(--g200);border-radius:var(--rl);padding:26px}
+.picon{width:42px;height:42px;border-radius:10px;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.pcard h3{color:var(--black);margin-bottom:7px}
+.pcard p{font-size:14px}
+
+/* SOLUTION */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:44px}
+.sitem{padding:22px;border-radius:var(--rl);background:var(--g50);border:1px solid var(--g200)}
+.schk{width:30px;height:30px;border-radius:8px;background:var(--black);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px}
+.sitem h3{font-size:14px;color:var(--black);margin-bottom:6px}
+.sitem p{font-size:13px;line-height:1.6}
+
+/* ONAPI */
+#onapi{background:var(--black);padding:60px 24px}
+#onapi .ctr{display:flex;align-items:flex-start;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.otitle{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:#fff;margin-bottom:10px}
+.osub{color:rgba(255,255,255,.55);font-size:14px;max-width:500px;line-height:1.6}
+.oitems{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.oitem{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:7px 14px;font-size:13px;font-weight:500;color:rgba(255,255,255,.8)}
+.ochk{width:18px;height:18px;border-radius:50%;background:#16a34a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.obadge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--rl);padding:24px 28px;text-align:center;min-width:180px}
+.obv{font-size:36px;font-weight:800;color:#fff;letter-spacing:-1.5px}
+.obs{font-size:13px;color:rgba(255,255,255,.45);margin-top:2px}
+
+/* PLANS */
+#plans{background:var(--g50)}
+.plgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:920px;margin:44px auto 0}
+.plcard{background:#fff;border:1.5px solid var(--g200);border-radius:var(--rl);padding:28px;position:relative}
+.plcard.pop{border-color:var(--black);background:var(--black);color:#fff}
+.plbadge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--black);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:100px;white-space:nowrap}
+.plcard.pop .plbadge{background:#fff;color:var(--black)}
+.plname{font-size:16px;font-weight:700;margin-bottom:5px}
+.plcard.pop .plname{color:#fff}
+.plprice{font-size:34px;font-weight:800;letter-spacing:-1.5px;color:var(--black);margin-bottom:3px}
+.plcard.pop .plprice{color:#fff}
+.plper{font-size:13px;color:var(--g500);margin-bottom:22px}
+.plcard.pop .plper{color:rgba(255,255,255,.5)}
+.plfeats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.plfeats li{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--g700)}
+.plcard.pop .plfeats li{color:rgba(255,255,255,.8)}
+.plck{width:17px;height:17px;border-radius:5px;background:var(--black);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;flex-shrink:0}
+.plcard.pop .plck{background:rgba(255,255,255,.2)}
+.plbtn{width:100%;padding:12px;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s}
+.plbtn-dk{background:var(--black);color:#fff}
+.plbtn-wh{background:#fff;color:var(--black)}
+.plbtn-ol{background:transparent;color:var(--black);border:1.5px solid var(--g200)}
+
+/* APP */
+.aw{display:none;min-height:100vh;flex-direction:column;padding-top:64px}
+.aw.on{display:flex}
+.am{flex:1;display:flex}
+.sb{width:216px;background:#fff;border-right:1px solid var(--g200);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column;gap:3px}
+.sblogo{font-size:17px;font-weight:800;letter-spacing:-1px;color:var(--black);padding:7px 11px;margin-bottom:10px}
+.sbi{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;font-size:14px;font-weight:500;color:var(--g700);cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:all .15s}
+.sbi:active,.sbi.on{background:var(--black);color:#fff}
+.sbi svg{width:15px;height:15px;flex-shrink:0}
+.ac{flex:1;padding:28px;overflow-y:auto;background:var(--g50)}
+
+/* LOGIN */
+#lv{display:none;position:fixed;inset:0;background:#fff;z-index:200;align-items:center;justify-content:center;padding:24px}
+#lv.on{display:flex}
+.lc{width:100%;max-width:380px;background:#fff;border:1px solid var(--g200);border-radius:var(--rl);padding:36px;box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.ll{font-size:22px;font-weight:800;letter-spacing:-1px;margin-bottom:6px}
+.lc h2{font-size:20px;margin-bottom:3px}
+.lc > p{font-size:14px;color:var(--g500);margin-bottom:24px}
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:13px;font-weight:600;color:var(--g700);margin-bottom:5px}
+.fi{width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:var(--r);font-size:14px;font-family:inherit;color:var(--black);outline:none;background:#fff;transition:border-color .15s}
+.fi:focus{border-color:var(--black)}
+.fi::placeholder{color:var(--g400)}
+.bf{width:100%;padding:12px;border-radius:var(--r);font-size:14px;font-weight:600;background:var(--black);color:#fff;border:none;cursor:pointer;margin-top:6px}
+.sw{text-align:center;margin-top:16px;font-size:14px;color:var(--g500)}
+.sw a{color:var(--black);font-weight:600;cursor:pointer}
+
+/* PAGES */
+.ph{margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.pt{font-size:20px;font-weight:700;color:var(--black)}
+.ps{font-size:14px;color:var(--g500)}
+.mets{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.met{background:#fff;border:1px solid var(--g200);border-radius:var(--rl);padding:22px}
+.mv{font-size:30px;font-weight:800;letter-spacing:-1.5px;color:var(--black);margin-bottom:3px}
+.mv.g{color:var(--green)}.mv.r{color:var(--red)}
+.ml2{font-size:13px;color:var(--g500);font-weight:500}
+.card{background:#fff;border:1px solid var(--g200);border-radius:var(--rl);overflow:hidden}
+.ch{padding:16px 22px;border-bottom:1px solid var(--g200);display:flex;align-items:center;justify-content:space-between}
+.ct{font-size:15px;font-weight:600;color:var(--black)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{padding:11px 15px;text-align:left;font-size:11px;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:.5px;background:var(--g50);border-bottom:1px solid var(--g200)}
+td{padding:13px 15px;font-size:14px;color:var(--g700);border-bottom:1px solid var(--g100)}
+tr:last-child td{border:none}
+tr:hover td{background:var(--g50)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:680px){.fg2{grid-template-columns:1fr}.mbody{grid-template-columns:1fr}.msb{display:none}}
+.fs{width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:var(--r);font-size:14px;font-family:inherit;color:var(--black);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 12px center;outline:none;appearance:none;padding-right:34px}
+.fs:focus{border-color:var(--black)}
+.lt{width:100%;border-collapse:collapse;margin-top:10px}
+.lt th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;color:var(--g500);padding:8px;background:var(--g50);border-bottom:1px solid var(--g200)}
+.lt td{padding:5px}
+.lt input,.lt select{width:100%;padding:7px 9px;border:1px solid var(--g200);border-radius:6px;font-size:13px;font-family:inherit;background:#fff;outline:none}
+.lt input:focus,.lt select:focus{border-color:var(--black)}
+.totbox{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);padding:18px;margin-top:14px}
+.tr2{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:14px;color:var(--g700)}
+.tr2.fin{font-size:17px;font-weight:700;color:var(--black);border-top:1px solid var(--g200);padding-top:10px;margin-top:5px}
+/* IA */
+.iabox{background:var(--g50);border:1px solid var(--g200);border-radius:var(--rl);padding:22px;margin-top:22px}
+.iah{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.iaico{width:30px;height:30px;border-radius:8px;background:var(--black);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff}
+.iar{background:#fff;border:1px solid var(--g200);border-radius:var(--r);padding:14px;font-size:14px;color:var(--g700);line-height:1.7;min-height:70px;white-space:pre-wrap}
+.iath{display:flex;gap:5px;align-items:center;padding:12px 0}
+.iad{width:7px;height:7px;border-radius:50%;background:var(--g400);animation:ib 1.2s infinite}
+.iad:nth-child(2){animation-delay:.2s}.iad:nth-child(3){animation-delay:.4s}
+@keyframes ib{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+.arow{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.bti{padding:11px 22px;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--g200);background:#fff;color:var(--black);transition:all .15s;display:flex;align-items:center;gap:7px}
+.bte{padding:11px 22px;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;border:none;background:var(--black);color:#fff;transition:all .15s;display:flex;align-items:center;gap:7px;opacity:.4;pointer-events:none}
+.bte.rdy{opacity:1;pointer-events:auto}
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--black);color:#fff;padding:13px 18px;border-radius:var(--r);font-size:14px;font-weight:500;z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s;max-width:300px}
+.toast.on{transform:translateY(0);opacity:1}
+.toast.err{background:var(--red)}.toast.ok{background:var(--green)}
+.hid{display:none!important}
+footer{background:var(--g900);color:rgba(255,255,255,.45);padding:36px 24px;text-align:center;font-size:13px}
+footer strong{color:rgba(255,255,255,.85)}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="ni">
+    <div class="nlogo"><div class="ndot"></div>FAC IA</div>
+    <div class="nlinks">
+      <button class="nlink" onclick="smth('#problems')">Características</button>
+      <button class="nlink" onclick="smth('#plans')">Planes</button>
+      <button class="nlink" onclick="smth('#onapi')">ONAPI</button>
+      <button class="nbtn" id="navBtn">Iniciar sesión</button>
+    </div>
+  </div>
+</nav>
+
+<div id="land">
+<section id="hero">
+  <div class="ctr">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>100% DGII Compliant · República Dominicana</div>
+    <h1>Facturación electrónica<br><span style="color:var(--g400)">inteligente</span> para tu empresa</h1>
+    <p style="font-size:1.1rem;max-width:520px;margin:16px auto 0">Emite e-CF en segundos. Claude AI valida cada factura. Integración directa con SAP y QuickBooks.</p>
+    <div class="ctas">
+      <button class="btn-p" id="heroBtn">✦ Comenzar gratis — 30 días</button>
+      <button class="btn-s" onclick="smth('#solution')">Ver cómo funciona →</button>
+    </div>
+    <div class="stats">
+      <div><div class="stat-v">+500</div><div class="stat-l">Empresas activas</div></div>
+      <div class="stat-d"></div>
+      <div><div class="stat-v">98.7%</div><div class="stat-l">Aceptación DGII</div></div>
+      <div class="stat-d"></div>
+      <div><div class="stat-v">2 min</div><div class="stat-l">Setup promedio</div></div>
+      <div class="stat-d"></div>
+      <div><div class="stat-v">RD$0</div><div class="stat-l">Costo infra</div></div>
+    </div>
+    <div class="mock">
+      <div class="mbar"><div class="md" style="background:#ff5f57"></div><div class="md" style="background:#ffbd2e"></div><div class="md" style="background:#28c840"></div></div>
+      <div class="mbody">
+        <div class="msb">
+          <div class="mni act"></div><div class="mni" style="opacity:.4"></div><div class="mni" style="opacity:.3"></div><div class="mni" style="opacity:.2"></div>
+        </div>
+        <div class="mc">
+          <div class="mmet">
+            <div class="mcard"><div class="mn" style="color:#16a34a">1,247</div><div class="ml">e-CF Aceptados</div></div>
+            <div class="mcard"><div class="mn" style="color:#dc2626">3</div><div class="ml">Rechazados</div></div>
+            <div class="mcard"><div class="mn">RD$8.4M</div><div class="ml">Facturado</div></div>
+          </div>
+          <div class="mrow"><div class="mt2" style="width:110px"></div><div style="flex:1"></div><span class="badge bg">✓ Aceptada</span></div>
+          <div class="mrow"><div class="mt2" style="width:80px"></div><div style="flex:1"></div><span class="badge bb">↑ Enviada</span></div>
+          <div class="mrow"><div class="mt2" style="width:95px"></div><div style="flex:1"></div><span class="badge bgr">✎ Borrador</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problems" style="background:var(--g50)">
+  <div class="ctr" style="text-align:center">
+    <h2>La facturación electrónica no debería ser un dolor de cabeza</h2>
+    <div class="pgrid">
+      <div class="pcard"><div class="picon">❌</div><h3>¿Facturas rechazadas por la DGII?</h3><p>RNC inválidos, ITBIS mal aplicado, secuencias incorrectas. Cada rechazo cuesta tiempo y dinero.</p></div>
+      <div class="pcard"><div class="picon">⏱️</div><h3>¿Procesos manuales que consumen horas?</h3><p>Generar XML a mano, firmar documentos, hacer seguimiento a cada factura. Se puede automatizar.</p></div>
+      <div class="pcard"><div class="picon">🔌</div><h3>¿Integración con SAP imposible?</h3><p>Datos en SAP B1 que no llegan al sistema de facturación. FAC IA los sincroniza automáticamente.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="solution">
+  <div class="ctr" style="text-align:center">
+    <h2>Un sistema que trabaja por ti</h2>
+    <div class="sgrid">
+      <div class="sitem"><div class="schk">✓</div><h3>Validación IA</h3><p>Claude AI revisa RNC, ITBIS, totales y formato antes de enviar. Cero rechazos evitables.</p></div>
+      <div class="sitem"><div class="schk">✓</div><h3>XML automático</h3><p>Genera e-CF con CUFE y lo envía directo a la DGII sin intervención manual.</p></div>
+      <div class="sitem"><div class="schk">✓</div><h3>Todos los e-CF</h3><p>B01, B02, B14, B15, B16. Crédito fiscal, consumidor final, gubernamental, exportaciones.</p></div>
+      <div class="sitem"><div class="schk">✓</div><h3>SAP B1 nativo</h3><p>Sincronización bidireccional. Las facturas SAP se convierten en e-CF automáticamente.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="onapi" style="background:var(--black);padding:60px 24px">
+  <div class="ctr" style="display:flex;align-items:flex-start;justify-content:space-between;gap:32px;flex-wrap:wrap">
+    <div>
+      <div class="otitle">Registro ONAPI y certificación DGII — <span style="color:rgba(255,255,255,.4)">totalmente gratis</span></div>
+      <p class="osub">Gestionamos el proceso completo de registro como emisor electrónico ante la DGII y el registro de marca en ONAPI sin costo adicional.</p>
+      <div class="oitems">
+        <div class="oitem"><div class="ochk">✓</div>Registro como emisor electrónico DGII</div>
+        <div class="oitem"><div class="ochk">✓</div>Certificación de software DGII</div>
+        <div class="oitem"><div class="ochk">✓</div>Registro de nombre comercial ONAPI</div>
+        <div class="oitem"><div class="ochk">✓</div>Gestión completa sin que muevas un dedo</div>
+      </div>
+    </div>
+    <div class="obadge"><div style="font-size:36px;margin-bottom:6px">🏛️</div><div class="obv">100%</div><div class="obs">DGII Compliant</div></div>
+  </div>
+</section>
+
+<section id="plans" style="background:var(--g50)">
+  <div class="ctr" style="text-align:center">
+    <h2>Elige el plan perfecto para tu empresa</h2>
+    <p style="margin-top:8px">30 días gratis en todos los planes. Sin tarjeta de crédito.</p>
+    <div class="plgrid">
+      <div class="plcard">
+        <div class="plname">Básico</div><div class="plprice">RD$1,700</div><div class="plper">/mes · 100 facturas</div>
+        <ul class="plfeats"><li><div class="plck">✓</div>e-CF B01, B02, B14, B15</li><li><div class="plck">✓</div>Dashboard de métricas</li><li><div class="plck">✓</div>Registro ONAPI gratis</li><li><div class="plck">✓</div>Certificación DGII gratis</li></ul>
+        <button class="plbtn plbtn-ol" onclick="showLogin()">Empezar gratis</button>
+      </div>
+      <div class="plcard pop">
+        <div class="plbadge">MÁS POPULAR</div>
+        <div class="plname">Profesional</div><div class="plprice">RD$4,600</div><div class="plper">/mes · 500 facturas</div>
+        <ul class="plfeats"><li><div class="plck">✓</div>Todo lo del Básico</li><li><div class="plck">✓</div>Integración SAP B1</li><li><div class="plck">✓</div>Validación IA Claude</li><li><div class="plck">✓</div>Múltiples usuarios</li></ul>
+        <button class="plbtn plbtn-wh" onclick="showLogin()">Empezar gratis</button>
+      </div>
+      <div class="plcard">
+        <div class="plname">Empresarial</div><div class="plprice">RD$11,600</div><div class="plper">/mes · Ilimitado</div>
+        <ul class="plfeats"><li><div class="plck">✓</div>Todo lo del Profesional</li><li><div class="plck">✓</div>SAP + QuickBooks</li><li><div class="plck">✓</div>Agente IA dedicado</li><li><div class="plck">✓</div>API para desarrolladores</li></ul>
+        <button class="plbtn plbtn-dk" onclick="showLogin()">Empezar gratis</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><strong>FAC IA</strong> · Facturación electrónica inteligente · República Dominicana<br>RNC: 131-12345-6 · contacto@facia.do · DGII Compliant<br><span style="font-size:11px;display:block;margin-top:6px">Motor IA: Puter.js · Claude Sonnet 4.5</span></footer>
+</div>
+
+<!-- LOGIN -->
+<div id="lv">
+  <div class="lc">
+    <div class="ll">FAC IA</div>
+    <h2 id="at">Iniciar sesión</h2>
+    <p id="as">Bienvenido de vuelta a tu plataforma de facturación</p>
+    <div class="fg"><label class="fl">Correo electrónico</label><input class="fi" id="ae" type="email" placeholder="tu@empresa.com"></div>
+    <div class="fg hid" id="ang"><label class="fl">Nombre de la empresa</label><input class="fi" id="an" placeholder="Mi Empresa SRL"></div>
+    <div class="fg"><label class="fl">Contraseña</label><input class="fi" id="ap" type="password" placeholder="••••••••"></div>
+    <button class="bf" id="asb">Iniciar sesión</button>
+    <div class="sw" id="asw">¿No tienes cuenta? <a id="atsw">Regístrate gratis</a></div>
+    <div style="margin-top:14px;text-align:center"><button style="background:none;border:none;font-size:13px;color:var(--g500);cursor:pointer" id="puterBtn">✦ Continuar con Puter</button></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="aw" id="aw">
+  <div class="am">
+    <div class="sb">
+      <div class="sblogo">FAC IA</div>
+      <button class="sbi on" data-p="dashboard" onclick="pg('dashboard',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</button>
+      <button class="sbi" data-p="nf" onclick="pg('nf',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nueva Factura</button>
+      <button class="sbi" data-p="flist" onclick="pg('flist',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Facturas</button>
+      <button class="sbi" data-p="cli" onclick="pg('cli',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Clientes</button>
+      <button class="sbi" data-p="cfg" onclick="pg('cfg',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Configuración</button>
+      <div style="flex:1"></div>
+      <button class="sbi" style="color:var(--g400)" onclick="doLogout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar sesión</button>
+    </div>
+    <div class="ac">
+      <!-- DASHBOARD -->
+      <div id="p-dashboard">
+        <div class="ph"><div><div class="pt">Dashboard</div><div class="ps">Resumen de facturación</div></div><button class="btn-p" onclick="pg('nf',document.querySelector('[data-p=nf]'))">+ Nueva Factura</button></div>
+        <div class="mets">
+          <div class="met"><div class="mv" id="mEm">0</div><div class="ml2">Emitidas este mes</div></div>
+          <div class="met"><div class="mv g" id="mAc">0</div><div class="ml2">Aceptadas DGII</div></div>
+          <div class="met"><div class="mv r" id="mRe">0</div><div class="ml2">Rechazadas</div></div>
+          <div class="met"><div class="mv" id="mTo">RD$0</div><div class="ml2">Total facturado</div></div>
+        </div>
+        <div class="card"><div class="ch"><div class="ct">Últimas facturas</div></div><div class="tw"><table><thead><tr><th>N° e-CF</th><th>Comprador</th><th>Tipo</th><th>Total</th><th>Estado</th></tr></thead><tbody id="dbF"><tr><td colspan="5" style="text-align:center;color:var(--g400);padding:28px">No hay facturas aún.</td></tr></tbody></table></div></div>
+      </div>
+      <!-- NUEVA FACTURA -->
+      <div id="p-nf" class="hid">
+        <div class="ph"><div><div class="pt">Nueva Factura</div><div class="ps">Emite un comprobante fiscal electrónico</div></div></div>
+        <div class="card" style="padding:26px">
+          <div class="fg2">
+            <div>
+              <h3 style="margin-bottom:18px;font-size:14px">Datos del comprador</h3>
+              <div class="fg"><label class="fl">RNC / Cédula</label><input class="fi" id="fR" placeholder="131-12345-6"></div>
+              <div class="fg"><label class="fl">Nombre del comprador</label><input class="fi" id="fN" placeholder="Empresa Compradora SRL"></div>
+              <div class="fg"><label class="fl">Tipo de e-CF</label><select class="fs" id="fT"><option value="B01">B01 — Crédito Fiscal</option><option value="B02">B02 — Consumidor Final</option><option value="B14">B14 — Gubernamental</option><option value="B15">B15 — Exportaciones</option></select></div>
+              <div class="fg"><label class="fl">Fecha de emisión</label><input class="fi" id="fF" type="date"></div>
+            </div>
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="font-size:14px">Líneas</h3><button onclick="addL()" style="padding:5px 12px;border-radius:6px;border:1px solid var(--g200);background:#fff;font-size:13px;font-weight:600;cursor:pointer">+ Agregar</button></div>
+              <div class="tw"><table class="lt"><thead><tr><th>Descripción</th><th>Cant.</th><th>Precio</th><th>ITBIS%</th><th>Sub.</th><th></th></tr></thead><tbody id="lb"></tbody></table></div>
+              <div class="totbox"><div class="tr2"><span>Subtotal</span><span id="tS">RD$0.00</span></div><div class="tr2"><span>ITBIS</span><span id="tI">RD$0.00</span></div><div class="tr2 fin"><span>Total</span><span id="tT">RD$0.00</span></div></div>
+            </div>
+          </div>
+          <div class="iabox">
+            <div class="iah"><div class="iaico">✦</div><div><div style="font-size:14px;font-weight:600;color:var(--black)">Validación con IA · Claude Sonnet 4.5</div><div style="font-size:13px;color:var(--g500)">Revisa RNC, ITBIS, totales y formato antes de emitir</div></div></div>
+            <div class="iar" id="iaR" style="color:var(--g400)">El análisis de IA aparecerá aquí...</div>
+            <div class="arow">
+              <button class="bti" id="bV" onclick="valIA()">✦ Validar con IA</button>
+              <button class="bte" id="bE" onclick="emitir()">⚡ Emitir e-CF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FACTURAS -->
+      <div id="p-flist" class="hid">
+        <div class="ph"><div><div class="pt">Facturas</div><div class="ps">Historial de comprobantes electrónicos</div></div><button class="btn-p" onclick="expCSV()">↓ Exportar CSV</button></div>
+        <div class="card" style="margin-bottom:14px;padding:14px 18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <select class="fs" id="fE" style="width:150px" onchange="renF()"><option value="">Todos los estados</option><option>Aceptada</option><option>Rechazada</option><option>Enviada</option><option>Borrador</option></select>
+          <select class="fs" id="fTi" style="width:130px" onchange="renF()"><option value="">Todos los tipos</option><option>B01</option><option>B02</option><option>B14</option><option>B15</option></select>
+          <input class="fi" id="fBu" style="width:190px" placeholder="Buscar..." oninput="renF()">
+        </div>
+        <div class="card"><div class="tw"><table><thead><tr><th>N° e-CF</th><th>Comprador</th><th>Tipo</th><th>Fecha</th><th>Total</th><th>Estado</th></tr></thead><tbody id="tF"><tr><td colspan="6" style="text-align:center;color:var(--g400);padding:28px">No hay facturas aún.</td></tr></tbody></table></div></div>
+      </div>
+      <!-- CLIENTES -->
+      <div id="p-cli" class="hid">
+        <div class="ph"><div><div class="pt">Clientes</div></div><button class="btn-p" onclick="showCF()">+ Nuevo cliente</button></div>
+        <div class="card hid" id="cfW" style="padding:26px;margin-bottom:14px">
+          <h3 style="margin-bottom:18px;font-size:14px">Nuevo cliente</h3>
+          <div class="fg2"><div><div class="fg"><label class="fl">Nombre / Razón social</label><input class="fi" id="cN" placeholder="Empresa SRL"></div><div class="fg"><label class="fl">RNC / Cédula</label><input class="fi" id="cR" placeholder="131-12345-6"></div></div><div><div class="fg"><label class="fl">Email</label><input class="fi" id="cE" type="email" placeholder="contacto@empresa.com"></div><div class="fg"><label class="fl">Tipo default</label><select class="fs" id="cT"><option value="B01">B01</option><option value="B02">B02</option><option value="B14">B14</option></select></div></div></div>
+          <div style="display:flex;gap:10px;margin-top:8px"><button class="btn-p" onclick="saveC()">Guardar</button><button class="btn-s" onclick="document.getElementById('cfW').classList.add('hid')">Cancelar</button></div>
+        </div>
+        <div class="card"><div style="padding:14px 18px;border-bottom:1px solid var(--g200)"><input class="fi" id="bC" placeholder="Buscar cliente..." oninput="renC()" style="max-width:280px"></div><div class="tw"><table><thead><tr><th>Nombre</th><th>RNC</th><th>Email</th><th>Tipo default</th></tr></thead><tbody id="tC"><tr><td colspan="4" style="text-align:center;color:var(--g400);padding:28px">No hay clientes aún.</td></tr></tbody></table></div></div>
+      </div>
+      <!-- CONFIG -->
+      <div id="p-cfg" class="hid">
+        <div class="ph"><div class="pt">Configuración</div></div>
+        <div style="display:flex;gap:7px;margin-bottom:18px" id="tabs">
+          <button class="bti" id="tEb" onclick="swt('e')" style="background:var(--black);color:#fff;border-color:var(--black)">Mi Empresa</button>
+          <button class="bti" id="tDb" onclick="swt('d')">DGII</button>
+          <button class="bti" id="tSb" onclick="swt('s')">SAP</button>
+        </div>
+        <div class="card" style="padding:26px">
+          <div id="tE"><h3 style="margin-bottom:18px;font-size:14px">Datos de la empresa</h3><div class="fg2"><div><div class="fg"><label class="fl">Nombre comercial</label><input class="fi" id="cfN"></div><div class="fg"><label class="fl">RNC</label><input class="fi" id="cfR" placeholder="131-12345-6"></div></div><div><div class="fg"><label class="fl">Razón social</label><input class="fi" id="cfRz"></div><div class="fg"><label class="fl">Email</label><input class="fi" id="cfE" type="email"></div></div></div><button class="btn-p" style="margin-top:8px" onclick="svCfg('e')">Guardar cambios</button></div>
+          <div id="tD" class="hid"><h3 style="margin-bottom:18px;font-size:14px">Configuración DGII</h3><div class="fg"><label class="fl">API Key DGII</label><input class="fi" id="cfDk" type="password" placeholder="Tu API Key de la DGII"></div><div class="fg2"><div class="fg"><label class="fl">Secuencia B01</label><input class="fi" id="cfSB01" type="number" value="1"></div><div class="fg"><label class="fl">Secuencia B02</label><input class="fi" id="cfSB02" type="number" value="1"></div></div><button class="btn-p" onclick="svCfg('d')">Guardar DGII</button></div>
+          <div id="tS" class="hid"><h3 style="margin-bottom:18px;font-size:14px">Integración SAP B1</h3><div class="fg"><label class="fl">URL endpoint SAP</label><input class="fi" id="cfSu" placeholder="https://sap-server:50000/b1s/v1"></div><div class="fg"><label class="fl">Usuario SAP</label><input class="fi" id="cfSus"></div><div class="fg"><label class="fl">Base de datos</label><input class="fi" id="cfSdb"></div><div style="display:flex;gap:10px;margin-top:8px"><button class="btn-p" onclick="svCfg('s')">Guardar SAP</button><button class="bti" onclick="tstSAP()">Probar conexión</button></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+var ST={user:null,facturas:JSON.parse(localStorage.getItem('fi_f')||'[]'),clientes:JSON.parse(localStorage.getItem('fi_c')||'[]'),cfg:JSON.parse(localStorage.getItem('fi_cfg')||'{}'),iaOk:false,ln:[]};
+function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function fn(n){return parseFloat(n||0).toLocaleString('es-DO',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function toast(m,t){var e=document.getElementById('toast');e.textContent=m;e.className='toast on'+(t?' '+t:'');setTimeout(function(){e.className='toast'},3000)}
+function be(id){return document.getElementById(id)}
+function smth(id){var el=document.querySelector(id);if(el)el.scrollIntoView({behavior:'smooth'})}
+window.smth=smth;
+
+// AUTH
+function showLogin(){be('lv').classList.add('on');be('land').style.display='none'}
+window.showLogin=showLogin;
+be('navBtn').addEventListener('click',showLogin);
+be('heroBtn').addEventListener('click',showLogin);
+var isReg=false;
+be('atsw').addEventListener('click',function(){
+  isReg=!isReg;
+  be('at').textContent=isReg?'Crear cuenta':'Iniciar sesión';
+  be('as').textContent=isReg?'30 días gratis, sin tarjeta':'Bienvenido de vuelta';
+  be('ang').classList.toggle('hid',!isReg);
+  be('asw').innerHTML=isReg?'¿Ya tienes cuenta? <a id="atsw">Inicia sesión</a>':'¿No tienes cuenta? <a id="atsw">Regístrate gratis</a>';
+  be('atsw').addEventListener('click',arguments.callee);
+});
+be('asb').addEventListener('click',function(){
+  var e=be('ae').value.trim(),p=be('ap').value;
+  if(!e||!p){toast('Completa todos los campos','err');return}
+  var u={email:e,nombre:be('an').value||e.split('@')[0],plan:'Básico'};
+  ST.user=u;localStorage.setItem('fi_u',JSON.stringify(u));
+  be('lv').classList.remove('on');enterApp();
+});
+be('puterBtn').addEventListener('click',function(){
+  if(typeof puter==='undefined'){toast('Puter.js no está listo','err');return}
+  puter.auth.signIn().then(function(u){
+    var usr={email:u.email||'puter@facia.do',nombre:u.username||'Usuario Puter',plan:'Profesional',puter:true};
+    ST.user=usr;localStorage.setItem('fi_u',JSON.stringify(usr));
+    be('lv').classList.remove('on');enterApp();
+  }).catch(function(e){toast('Error Puter: '+(e&&e.message||''),'err')});
+});
+function enterApp(){be('land').style.display='none';be('lv').classList.remove('on');be('aw').classList.add('on');be('nav').style.display='none';renDB()}
+window.doLogout=function(){ST.user=null;localStorage.removeItem('fi_u');be('aw').classList.remove('on');be('land').style.display='block';be('nav').style.display='block'};
+
+// NAV
+window.pg=function(p,btn){
+  document.querySelectorAll('[id^="p-"]').forEach(function(x){x.classList.add('hid')});
+  be('p-'+p).classList.remove('hid');
+  document.querySelectorAll('.sbi').forEach(function(b){b.classList.remove('on')});
+  if(btn)btn.classList.add('on');
+  if(p==='flist')renF();if(p==='cli')renC();if(p==='dashboard')renDB();
+};
+
+// DASHBOARD
+function renDB(){
+  var f=ST.facturas,now=new Date(),m=now.getMonth(),y=now.getFullYear();
+  var em=f.filter(function(x){var d=new Date(x.fecha);return d.getMonth()===m&&d.getFullYear()===y}).length;
+  var ac=f.filter(function(x){return x.estado==='Aceptada'}).length;
+  var re=f.filter(function(x){return x.estado==='Rechazada'}).length;
+  var to=f.reduce(function(s,x){return s+(parseFloat(x.total)||0)},0);
+  var mEm=be('mEm');if(mEm)mEm.textContent=em;
+  var mAc=be('mAc');if(mAc)mAc.textContent=ac;
+  var mRe=be('mRe');if(mRe)mRe.textContent=re;
+  var mTo=be('mTo');if(mTo)mTo.textContent='RD$'+fn(to);
+  var tb=be('dbF');if(!tb)return;
+  if(!f.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--g400);padding:28px">No hay facturas aún.</td></tr>';return}
+  tb.innerHTML=f.slice(-10).reverse().map(function(x){return'<tr><td style="font-family:monospace;font-size:13px">'+esc(x.numero)+'</td><td>'+esc(x.comprador)+'</td><td><span class="badge bgr">'+esc(x.tipo)+'</span></td><td style="font-weight:600">RD$'+fn(x.total)+'</td><td>'+bEst(x.estado)+'</td></tr>'}).join('')
+}
+
+// LINEAS
+window.addL=function(){ST.ln.push({id:Date.now(),desc:'',cant:1,precio:0,itbis:18});renL()};
+function renL(){
+  var tb=be('lb');if(!tb)return;
+  tb.innerHTML=ST.ln.map(function(r){
+    return'<tr data-id="'+r.id+'"><td><input type="text" value="'+esc(r.desc)+'" placeholder="Producto o servicio" onchange="uL('+r.id+','desc',this.value)" oninput="uL('+r.id+','desc',this.value)"></td>'+
+    '<td><input type="number" value="'+r.cant+'" min="1" style="width:55px" onchange="uL('+r.id+','cant',this.value)" oninput="uL('+r.id+','cant',this.value)"></td>'+
+    '<td><input type="number" value="'+r.precio+'" min="0" step="0.01" style="width:80px" onchange="uL('+r.id+','precio',this.value)" oninput="uL('+r.id+','precio',this.value)"></td>'+
+    '<td><select onchange="uL('+r.id+','itbis',this.value)"><option value="0"'+(r.itbis===0?' selected':'')+'>0%</option><option value="16"'+(r.itbis===16?' selected':'')+'>16%</option><option value="18"'+(r.itbis===18?' selected':'')+'>18%</option></select></td>'+
+    '<td style="font-weight:600;font-size:12px">'+fn((r.cant||0)*(r.precio||0))+'</td>'+
+    '<td><button onclick="rmL('+r.id+')" style="background:none;border:none;color:var(--g400);cursor:pointer;font-size:15px;padding:3px">×</button></td></tr>'
+  }).join('');calcT();
+}
+window.uL=function(id,f,v){var r=ST.ln.find(function(x){return x.id===id});if(!r)return;if(f==='cant'||f==='precio'||f==='itbis')r[f]=parseFloat(v)||0;else r[f]=v;calcT()};
+window.rmL=function(id){ST.ln=ST.ln.filter(function(x){return x.id!==id});renL()};
+function calcT(){
+  var ls=ST.ln.map(function(r){var b=(r.cant||0)*(r.precio||0);return{b:b,i:b*(r.itbis/100)}});
+  var sb=ls.reduce(function(s,l){return s+l.b},0);
+  var it=ls.reduce(function(s,l){return s+l.i},0);
+  var to=sb+it;
+  var s=be('tS'),i=be('tI'),t=be('tT');
+  if(s)s.textContent='RD$'+fn(sb);if(i)i.textContent='RD$'+fn(it);if(t)t.textContent='RD$'+fn(to);
+  return{sb:sb,it:it,to:to}
+}
+
+// IA
+window.valIA=function(){
+  if(typeof puter==='undefined'){toast('Puter.js requerido para IA','err');return}
+  var rnc=be('fR').value,nombre=be('fN').value,tipo=be('fT').value;
+  var tots=calcT();
+  if(!nombre){toast('Ingresa el nombre del comprador','err');return}
+  if(!ST.ln.length||!ST.ln[0].desc){toast('Agrega al menos una línea','err');return}
+  var el=be('iaR');
+  el.innerHTML='<div class="iath"><div class="iad"></div><div class="iad"></div><div class="iad"></div></div>';
+  be('bV').disabled=true;
+  var prompt='Eres experto en facturación electrónica de República Dominicana (DGII). Valida este e-CF:
+Tipo: '+tipo+'
+RNC comprador: '+(rnc||'No ingresado')+'
+Nombre: '+nombre+'
+Subtotal: RD$'+fn(tots.sb)+'
+ITBIS: RD$'+fn(tots.it)+'
+Total: RD$'+fn(tots.to)+'
+Líneas: '+ST.ln.map(function(l){return l.desc+' x'+l.cant+' @ RD$'+l.precio}).join(', ')+'
+
+Verifica: 1) RNC válido para el tipo de comprobante 2) ITBIS correcto 3) Totales correctos 4) Tipo e-CF apropiado. Responde en español con tu análisis. Indica APROBADO u OBSERVACIONES.';
+  puter.auth.isSignedIn().then(function(ok){
+    var doCall=function(){puter.ai.chat(prompt,{model:'claude-sonnet-4-5'}).then(function(res){
+      var t=typeof res==='string'?res:(res&&res.message&&res.message.content?res.message.content:JSON.stringify(res));
+      if(typeof t!=='string')t=JSON.stringify(t);
+      el.textContent=t;ST.iaOk=true;be('bE').classList.add('rdy');be('bV').disabled=false;toast('Validación completada','ok');
+    }).catch(function(e){el.textContent='Error: '+(e&&e.message||String(e));be('bV').disabled=false})};
+    if(ok)doCall();else puter.auth.signIn().then(doCall).catch(function(){el.textContent='Necesitas autenticarte con Puter para usar la IA.';be('bV').disabled=false});
+  }).catch(function(){el.textContent='Error al conectar con Puter.js';be('bV').disabled=false});
+};
+
+window.emitir=function(){
+  var rnc=be('fR').value,nombre=be('fN').value,tipo=be('fT').value,fecha=be('fF').value;
+  var tots=calcT();
+  var seq=(ST.cfg['seq_'+tipo]||1),numero=tipo+'-'+new Date().getFullYear()+'-'+String(seq).padStart(8,'0');
+  ST.cfg['seq_'+tipo]=seq+1;localStorage.setItem('fi_cfg',JSON.stringify(ST.cfg));
+  var fac={id:Date.now(),numero:numero,comprador:nombre,rnc:rnc,tipo:tipo,fecha:fecha,sub:tots.sb,itbis:tots.it,total:tots.to,estado:'Enviada',ia:ST.iaOk};
+  ST.facturas.push(fac);localStorage.setItem('fi_f',JSON.stringify(ST.facturas));
+  setTimeout(function(){var idx=ST.facturas.findIndex(function(f){return f.id===fac.id});if(idx>-1){ST.facturas[idx].estado='Aceptada';localStorage.setItem('fi_f',JSON.stringify(ST.facturas));toast('✓ '+numero+' aceptado por la DGII','ok');renDB()}},2500);
+  ST.iaOk=false;be('bE').classList.remove('rdy');be('iaR').textContent='El análisis de IA aparecerá aquí...';
+  ST.ln=[];addL();be('fR').value='';be('fN').value='';calcT();
+  toast('Enviando '+numero+' a la DGII...','ok');renDB();pg('flist',document.querySelector('[data-p=flist]'));
+};
+
+function bEst(e){var m={Aceptada:'bg',Rechazada:'br',Enviada:'bb',Borrador:'bgr',Firmada:'bgr'};return'<span class="badge '+(m[e]||'bgr')+'">'+esc(e)+'</span>'}
+
+window.renF=function(){
+  var f=ST.facturas,e=be('fE').value,t=be('fTi').value,b=(be('fBu').value||'').toLowerCase();
+  if(e)f=f.filter(function(x){return x.estado===e});if(t)f=f.filter(function(x){return x.tipo===t});
+  if(b)f=f.filter(function(x){return(x.comprador||'').toLowerCase().includes(b)||(x.numero||'').toLowerCase().includes(b)});
+  var tb=be('tF');if(!tb)return;
+  if(!f.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--g400);padding:28px">Sin resultados.</td></tr>';return}
+  tb.innerHTML=f.slice().reverse().map(function(x){return'<tr><td style="font-family:monospace;font-size:12px">'+esc(x.numero)+'</td><td>'+esc(x.comprador)+'</td><td><span class="badge bgr">'+esc(x.tipo)+'</span></td><td>'+esc(x.fecha||'')+'</td><td style="font-weight:600">RD$'+fn(x.total)+'</td><td>'+bEst(x.estado)+'</td></tr>'}).join('')
+};
+window.expCSV=function(){var csv='Número,Comprador,Tipo,Fecha,Total,Estado
+'+ST.facturas.map(function(f){return[f.numero,f.comprador,f.tipo,f.fecha,f.total,f.estado].join(',')}).join('
+');var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='facturas-facia.csv';a.click()};
+
+window.showCF=function(){be('cfW').classList.remove('hid')};
+window.saveC=function(){var n=be('cN').value.trim();if(!n){toast('Ingresa el nombre','err');return}ST.clientes.push({id:Date.now(),nombre:n,rnc:be('cR').value,email:be('cE').value,tipo:be('cT').value});localStorage.setItem('fi_c',JSON.stringify(ST.clientes));be('cfW').classList.add('hid');renC();toast('Cliente guardado','ok')};
+window.renC=function(){var b=(be('bC').value||'').toLowerCase(),c=ST.clientes.filter(function(x){return!b||(x.nombre||'').toLowerCase().includes(b)||(x.rnc||'').includes(b)});var tb=be('tC');if(!tb)return;if(!c.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--g400);padding:28px">No hay clientes aún.</td></tr>';return}tb.innerHTML=c.map(function(x){return'<tr><td style="font-weight:500">'+esc(x.nombre)+'</td><td style="font-family:monospace;font-size:12px">'+esc(x.rnc)+'</td><td>'+esc(x.email)+'</td><td><span class="badge bgr">'+esc(x.tipo)+'</span></td></tr>'}).join('')};
+
+window.swt=function(t){['e','d','s'].forEach(function(x){be('t'+x.toUpperCase()).classList.toggle('hid',x!==t);var b=be('t'+x.toUpperCase()+'b');if(b){b.style.background=x===t?'var(--black)':'';b.style.color=x===t?'#fff':'';b.style.borderColor=x===t?'var(--black)':''}})};
+window.svCfg=function(t){if(t==='e'){ST.cfg.nombre=be('cfN').value;ST.cfg.rnc=be('cfR').value;ST.cfg.email=be('cfE').value;toast('Empresa guardada','ok')}else if(t==='d'){ST.cfg.dgiiKey=be('cfDk').value;ST.cfg.seqB01=parseInt(be('cfSB01').value)||1;ST.cfg.seqB02=parseInt(be('cfSB02').value)||1;toast('DGII guardada','ok')}else if(t==='s'){ST.cfg.sapUrl=be('cfSu').value;ST.cfg.sapUser=be('cfSus').value;ST.cfg.sapDb=be('cfSdb').value;toast('SAP guardado','ok')}localStorage.setItem('fi_cfg',JSON.stringify(ST.cfg))};
+window.tstSAP=function(){var u=be('cfSu').value;if(!u){toast('Ingresa la URL del endpoint SAP','err');return}if(typeof puter==='undefined'){toast('Puter.js requerido','err');return}toast('Probando conexión SAP...');puter.net.fetch(u,{method:'GET'}).then(function(r){toast('Conexión SAP exitosa ('+r.status+')','ok')}).catch(function(e){toast('Error SAP: '+(e&&e.message||String(e)),'err')})};
+
+window.addEventListener('load',function(){
+  var s=localStorage.getItem('fi_u');if(s){ST.user=JSON.parse(s);enterApp()}
+  var fd=be('fF');if(fd)fd.value=new Date().toISOString().split('T')[0];
+  addL();renDB();
+});
+})();
+</script>
+</body>
+</html>
